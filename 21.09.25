@@ -1,0 +1,71 @@
+import turtle
+import math
+
+# Функция для телепортирования черепашки
+def teleport(harr, x, y):
+    harr.penup()
+    harr.goto(x, y)
+    harr.pendown()
+
+# Функция для смены цвета пера
+def change_color(harr, color):
+    harr.pencolor(color)
+
+# Функция для смены толщины пера
+def change_pen_size(harr, size):
+    harr.pensize(size)
+
+# Функция для отрисовки квадрата
+def square(harr, x, y, size):
+    teleport(harr, x, y)
+    for i in range(4):
+        harr.forward(size)
+        harr.left(90)
+
+# Функция для отрисовки равностороннего треугольника
+def triangle(harr, x, y, size):
+    teleport(harr, x, y)
+    for i in range(3):
+        harr.forward(size)
+        harr.left(120)
+
+# Функция для отрисовки круга
+def circle(harr, x, y, radius):
+    teleport(harr, x, y)
+    harr.circle(radius)
+
+#Функция принимает “черепашку”, координаты для функции teleport,
+#радуис, в пределах которого будет расположен мнугл. и кол-во углов
+# Функция для отрисовки правильного многоугольника
+def multiangle(harr, x, y, radius, angles):
+    side = 2 * radius * math.sin(math.pi / angles)
+    teleport(harr, x, y)
+    harr.left(180 / angles)
+    for _ in range(angles):
+        harr.forward(side)
+        harr.left(360 / angles)
+    harr.right(180 / angles) 
+
+Harry = turtle.Turtle()
+Harry.pencolor("purple")
+
+change_color(Harry, "blue") 
+change_pen_size(Harry, 3) 
+square(Harry, -100, 0, 50) 
+
+change_color(Harry, "red") 
+change_pen_size(Harry, 2)
+triangle(Harry, 0, 100, 80)
+
+change_color(Harry, "green")
+circle(Harry, 100, 0, 40)
+
+change_color(Harry, "purple")
+multiangle(Harry, 0, -100, 60, 6)
+
+AnotherTurtle = turtle.Turtle()
+change_color(AnotherTurtle, "orange")
+change_pen_size(AnotherTurtle, 4)
+multiangle(AnotherTurtle, -100, -100, 30, 8)
+
+turtle.done()
